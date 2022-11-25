@@ -1,4 +1,5 @@
 package com.isep.utils;
 
-public class ConsoleParser {
+public class ConsoleParser implements InputParser {
+
 }

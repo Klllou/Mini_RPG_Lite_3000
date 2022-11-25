@@ -1,11 +1,20 @@
 package com.isep.rpg;
 
-public class Dragon extends Enemy{
-    public Dragon(String n, int h) {
-        super(n, h);
-    }
-    @Override
-    public void fight(Combatant combatant) {
-        combatant.lose(1);
-    }
+public class Dragon extends Enemy {
+
+        public Dragon() {
+        // Le dragon possède 5 points de vie et inflige 3 points de dégats
+        super( "dragon",5, 0);
+        }
+
+        @Override
+        public void doAction(Combatant badOne) {
+
+        }
+
+// Implémentation de la méthode abstraite "fight" par le dragon
+        /*@Override
+        public void fight(Combatant combatant) {
+            combatant.lose(getDamagePoints() );
+        }*/
 }
