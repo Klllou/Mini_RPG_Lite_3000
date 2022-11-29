@@ -35,32 +35,35 @@ public class Game {
     private void initializeHeros(){
         while (true){
             Scanner scanner = new Scanner(System.in);
-            System.out.println("choose a class");
-            System.out.println("(1) Warrior");
+            System.out.println("> Choose a class or press enter to continue.");
+            System.out.println("     (1) \uD83D\uDDE1Warrior ");
+            System.out.println("     (2) ⚕Healer");
+            System.out.println("     (3) Mage");
+            System.out.println("     (4) Hunter");
             String herosClass = scanner.nextLine();
             if (herosClass == "") {
-                System.out.println(heros);
                 return;
             }
             Hero hero = null;
             String name;
             switch(herosClass){
 
-                case "warrior","1":
-                    System.out.println("choose a name");
+                case "Warrior","warrior","1":
+                    System.out.println("What's your name ?");
                     name = scanner.nextLine();
-                    hero = new Warrior(name);
+                    hero = new Warrior("\uD83D\uDDE1" + name);
                     break;
-                /*case "mage":
+                case "Healer", "healer", "2":
+                    System.out.println("What's your name ?");
                     name = scanner.nextLine();
-                    hero = new Mage(name);
-
-                case 3:
+                    hero = new Healer("\uD83E\uDDD9" + name);
+                    break;
+                /*case 3:
                     System.out.println("Buenos dias");
                     break;*/
                 default:
 
-                    System.out.println("Choix incorrect");
+                    System.out.println("Wrong input, try again");
                     break;
             }
             if (hero != null) {
@@ -75,7 +78,6 @@ public class Game {
             enemies.add(enemy);
 
         }
-        System.out.println(enemies);
     }
 
     public void start() {
@@ -96,24 +98,26 @@ public class Game {
 
 
                 // Attaque de l'ennemi
-                displayMessage("Le méchant " + badOne.getName()
-                        + " attaque le gentil " + goodOne.getName() + "...");
+                displayMessage("> "+badOne.getName()
+                        + " attaque " + goodOne.getName() + " ! " );
 
                 badOne.fight(goodOne);
                 if (goodOne.getHealthPoint() <= 0) {
                     displayMessage
-                            ("Le pauvre " + goodOne.getName() + " a été vaincu...");
+                            (goodOne.getName() + " has found an honorable death...");
                     heros.remove(ixHero);
                     ixHero--; // Correction: évite que le suivant perde son tour
                 } else {
 
                     // Riposte du gentil, s'il n'est pas vaincu
-                    displayMessage("Le gentil " + goodOne.getName()
-                            + " attaque le méchant " + badOne.getName() + "...");
+                    displayMessage("> " + goodOne.getName()
+                            + " attaque " + badOne.getName() + " ! ");
+                    System.out.println();
+                    System.out.println("It's " + goodOne.getName() + "'s turn to do an action");
                     goodOne.doAction(badOne);
                     if (badOne.getHealthPoint() <= 0) {
-                        displayMessage("Bravo, " + goodOne.getName()
-                                + " a vaincu " + badOne.getName() + " !!!");
+                        displayMessage("Yeay! " + goodOne.getName()
+                                + " has defeat " + badOne.getName() + ".");
                         enemies.remove(0);
                     }
 
@@ -121,11 +125,11 @@ public class Game {
 
                 // Tests de fin du jeu
                 if (heros.size() == 0) {
-                    displayMessage("Les héros ont perdu, c'est la fin du monde...");
+                    displayMessage("All the heros have been defeat... RUN FOR YOUR LIFEEE AAAAAAAAAAAAHHHHHHHHHHHHHHHH");
                     break;
                 }
                 if (enemies.size() == 0) {
-                    displayMessage("BRAVO, les héros ont gagné, le monde est sauvé !!!");
+                    displayMessage("Congratulations fellow adventurer(s)! You can now proceed with the next fight.");
                     break;
                 }
 
@@ -134,7 +138,51 @@ public class Game {
             }
             nbFight++;
         }
+        Enemy enemy = new Boss();
+        enemies.add(enemy);
+        while (true) {
+            displayStatus(heros, enemies);
+            Combatant goodOne = heros.get(ixHero);
+            Combatant badOne = enemies.get(0);
 
+            // Attaque de l'ennemi
+            displayMessage(">" + badOne.getName()
+                    + " attack " + goodOne.getName());
+
+            badOne.fight(goodOne);
+            if (goodOne.getHealthPoint() <= 0) {
+                displayMessage
+                        (goodOne.getName() +  " has found an honorable death...");
+                heros.remove(ixHero);
+                ixHero--; // Correction: évite que le suivant perde son tour
+            } else {
+
+                // Riposte du gentil, s'il n'est pas vaincu
+                displayMessage(">" +goodOne.getName()
+                        + " attack " + badOne.getName());
+                System.out.println();
+                goodOne.doAction(badOne);
+                if (badOne.getHealthPoint() <= 0) {
+                    displayMessage("Yeay! " + goodOne.getName()
+                            + " has defeat " + badOne.getName() + ".");
+                    enemies.remove(0);
+                }
+
+            }
+
+            // Tests de fin du jeu
+            if (heros.size() == 0) {
+                displayMessage("All the heros have been defeat... EVERYBODY RUN FOR YOUR LIFEEE AAAAAAAAAAAAHHHHHHHHHHHHHHHH !!!!!!!!");
+                break;
+            }
+            if (enemies.size() == 0) {
+                displayMessage("Well done !!! I mean.. your life don't have sense anymore.. so maybe go back to your fields to grow some wheat to be useful ?");
+                break;
+            }
+
+            // Au tour du héro suivant
+            ixHero = (ixHero + 1) % heros.size();
+        }
     }
 
 
@@ -152,15 +200,21 @@ public class Game {
     //    "com.isep.utils", en s'inspirant de "InputParser" (méthodes de saisie)
 
     public static void displayStatus(List<Combatant> h, List<Combatant> e) {
-        System.out.println("#########################");
+        for (int i = 0 ; i<5;i++){
+            System.out.println();
+        }
+        System.out.println("--------------------------");
+        System.out.print(" Heros : ");
         for (Combatant c: h) {
-            System.out.print(c.getName() + "(" + c.getHealthPoint() + ") ");
+            System.out.print(c.getName() + "(" + c.getHealthPoint()+ "♥) ");
         }
         System.out.println();
+        System.out.print(" Enemies : ");
         for (Combatant c: e) {
-            System.out.print(c.getName() + "(" + c.getHealthPoint() + ") ");
+            System.out.print(c.getName() + "(" + c.getHealthPoint() + "♥) ");
         }
         System.out.println();
+        System.out.println("--------------------------");
     }
 
     public static void displayMessage(String message) {

@@ -8,18 +8,20 @@ public abstract class Hero extends Combatant {
         super(n, h);
     }
 
-    public void doAction(Combatant combatant){
 
+    public void doAction(Combatant combatant){
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.println("choose an action : 1 for fight or 0 for heal ");
+            System.out.println("What do you want to do ?");
+            System.out.println("(1) Attack");
+            System.out.println("(2) Eat / Heal yourself");
             String action = scanner.nextLine();
             switch (action) {
                 case "1":
                     fight(combatant);
                     return;
-                case "0":
-                    heal();
+                case "2":
+                    itemHeal();
                     return;
                 default:
                     System.out.println("Wrong input, try again");

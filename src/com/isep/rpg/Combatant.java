@@ -31,7 +31,10 @@ public abstract class Combatant {
         combatant.lose(getDamagePoints() );
     }
 
-    public void heal() {
+    public void healerHeal() {
+        gain(5 );
+    }
+    public void itemHeal() {
         gain(2 );
     }
     private int healthpoint ;
