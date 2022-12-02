@@ -10,7 +10,7 @@ public class Warrior extends Hero {
     // Implémentation de la méthode abstraite "fight" par le guerrier
     @Override
     public void fight(Combatant combatant) {
-        combatant.lose( 4/*weapon.getDamagePoints()*/ );
+        combatant.lose( weapon.getDamagePoints() );
     }
 
     // Implémentation de la méthode abstraite "take" par le guerrier :

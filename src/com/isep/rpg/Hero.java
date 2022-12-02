@@ -14,7 +14,7 @@ public abstract class Hero extends Combatant {
         while (true) {
             System.out.println("What do you want to do ?");
             System.out.println("    (1) Attack");
-            System.out.println("    (2) Eat / Heal yourself");
+            System.out.println("    (2) Eat");
             String action = scanner.nextLine();
             switch (action) {
                 case "1":

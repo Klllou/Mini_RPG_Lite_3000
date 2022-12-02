@@ -38,21 +38,29 @@ public class Game {
                     System.out.println("What's your name ?");
                     name = scanner.nextLine();
                     hero = new Warrior("\uD83D\uDDE1" + name);
+                    Weapon sword = new Weapon("Sword", 5);
+                    hero.take(sword);
                     break;
                 case "Healer", "healer", "2":
                     System.out.println("What's your name ?");
                     name = scanner.nextLine();
                     hero = new Healer("⚕" + name);
+                    Weapon healerWeapon = new Weapon("Stick", 2);
+                    hero.take(healerWeapon);
                     break;
                 case "Mage","mage","3":
                     System.out.println("What's your name ?");
                     name = scanner.nextLine();
                     hero = new Mage("\uD83E\uDDD9" + name);
+                    Weapon magicWand = new Weapon("MagicWand", 7);
+                    hero.take(magicWand);
                     break;
                 case "Hunter","hunter","4":
                     System.out.println("What's your name ?");
                     name = scanner.nextLine();
                     hero = new Hunter("\uD83C\uDFF9" + name);
+                    Weapon bow = new Weapon("Bow", 6);
+                    hero.take(bow);
                     break;
                 default:
 

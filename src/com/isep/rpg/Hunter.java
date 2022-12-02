@@ -11,7 +11,7 @@ public class Hunter extends Hero{
     // Implémentation de la méthode abstraite "fight" par le guerrier
     @Override
     public void fight(Combatant combatant) {
-        combatant.lose( 6/*weapon.getDamagePoints()*/ );
+        combatant.lose( weapon.getDamagePoints());
     }
 
     // Implémentation de la méthode abstraite "take" par le guerrier :
@@ -31,7 +31,7 @@ public class Hunter extends Hero{
         while (true) {
             System.out.println("What do you want to do ?");
             System.out.println("    (1) Attack");
-            System.out.println("    (2) Eat / Heal yourself");
+            System.out.println("    (2) Eat ");
             String action = scanner.nextLine();
             switch (action) {
                 case "1","attack":
