@@ -3,13 +3,17 @@ package com.isep.rpg;
 
 public abstract class Combatant {
     protected int damagePoints;
-    public Combatant(String n, int h){
-        name = n;
-        healthpoint = h;
+    private int healthpoint ;
+    private String name;
+    String sign;
+
+    public Combatant(String name, int healthpoint){
+        this.name = name;
+        this.healthpoint = healthpoint;
     }
 
     public String getName(){
-        return name;
+        return sign + name;
     }
 
     public int getHealthPoint(){
@@ -27,18 +31,16 @@ public abstract class Combatant {
     public int getDamagePoints() {
         return this.damagePoints;
     }
+
     public void fight(Combatant combatant) {
         combatant.lose(getDamagePoints() );
     }
 
-    public void healerHeal() {
-        gain(5 );
-    }
-    public void itemHeal() {
-        gain(2 );
-    }
-    private int healthpoint ;
-    private String name;
 
-    public abstract void doAction(Combatant badOne);
+    public void useFood() {
+        gain(3 );
+    }
+
+
+    public abstract void doAction(Combatant combatant);
 }

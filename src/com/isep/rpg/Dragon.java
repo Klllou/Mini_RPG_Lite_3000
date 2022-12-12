@@ -4,7 +4,8 @@ public class Dragon extends Enemy {
 
         public Dragon() {
         // Le dragon possède 5 points de vie et inflige 3 points de dégats
-        super( "\uD83D\uDC09dragon",10, 0);
+        super( "dragon",10, 0);
+        this.sign = "\uD83D\uDC09";
         }
 
         @Override

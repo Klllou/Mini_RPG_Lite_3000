@@ -3,9 +3,11 @@ package com.isep.rpg;
 import java.util.Scanner;
 
 public class Hunter extends Hero{
+
     public Hunter(String n) {
         // Le guerrier possède 5 points de vie
         super(n, 4);
+        this.sign = "\uD83C\uDFF9";
     }
 
     // Implémentation de la méthode abstraite "fight" par le guerrier
@@ -16,14 +18,7 @@ public class Hunter extends Hero{
 
     // Implémentation de la méthode abstraite "take" par le guerrier :
     //   Le guerrier ne peut utiliser que les objets de type "Weapon"
-    @Override
-    public void take(Item item) {
-        if (item instanceof Weapon) {
-            weapon = (Weapon) item;
-        } else {
-            Game.displayMessage("Oups ! " + item.getName() + " est inutile...");
-        }
-    }
+
 
     @Override
     public void doAction(Combatant combatant){
@@ -38,13 +33,12 @@ public class Hunter extends Hero{
                     fight(combatant);
                     return;
                 case "2","eat":
-                    itemHeal();
+                    useFood();
                     return;
                 default:
                     System.out.println("Wrong input, try again");
             }
         }
     }
-    private Weapon weapon;
 }
 

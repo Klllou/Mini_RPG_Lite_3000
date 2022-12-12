@@ -9,6 +9,10 @@ import java.util.Scanner;
 import java.util.Random;
 public class Game {
 
+    int nbFight;
+    private List<Combatant> heros;
+    private List<Combatant> enemies;
+
     public Game(InputParser inputParser) {
 
         this.inputParser = inputParser;
@@ -32,38 +36,28 @@ public class Game {
             }
             Hero hero = null;
             String name;
+            System.out.println("What's your name ?");
+            name = scanner.nextLine();
             switch(herosClass){
 
                 case "Warrior","warrior","1":
-                    System.out.println("What's your name ?");
-                    name = scanner.nextLine();
-                    hero = new Warrior("\uD83D\uDDE1" + name);
-                    Weapon sword = new Weapon("Sword", 5);
-                    hero.take(sword);
+                    hero = new Warrior(name);
+                    hero.setWeapon("Sword", 5);
+                    hero.setArmor("steel Armor", 2);
                     break;
                 case "Healer", "healer", "2":
-                    System.out.println("What's your name ?");
-                    name = scanner.nextLine();
-                    hero = new Healer("⚕" + name);
-                    Weapon healerWeapon = new Weapon("Stick", 2);
-                    hero.take(healerWeapon);
+                    hero = new Healer(name);
+                    hero.setWeapon("Stick", 2);
                     break;
                 case "Mage","mage","3":
-                    System.out.println("What's your name ?");
-                    name = scanner.nextLine();
-                    hero = new Mage("\uD83E\uDDD9" + name);
-                    Weapon magicWand = new Weapon("MagicWand", 7);
-                    hero.take(magicWand);
+                    hero = new Mage(name);
+                    hero.setWeapon("MagicWand", 7);
                     break;
                 case "Hunter","hunter","4":
-                    System.out.println("What's your name ?");
-                    name = scanner.nextLine();
-                    hero = new Hunter("\uD83C\uDFF9" + name);
-                    Weapon bow = new Weapon("Bow", 6);
-                    hero.take(bow);
+                    hero = new Hunter(name);
+                    hero.setWeapon("Bow", 6);
                     break;
                 default:
-
                     System.out.println("Wrong input, try again");
                     break;
             }
@@ -109,7 +103,6 @@ public class Game {
 
                 displayStatus(heros, enemies);
 
-
                 Combatant goodOne = heros.get(ixHero);
                 Combatant badOne = enemies.get(ixEnemy);
 
@@ -145,6 +138,7 @@ public class Game {
                     break;
                 }
                 if (enemies.size() == 0) {
+
                     displayMessage("Congratulations fellow adventurer(s)! You can now proceed with the next fight.");
                     break;
                 }
@@ -208,9 +202,6 @@ public class Game {
 
     private InputParser inputParser;
 
-    int nbFight;
-    private List<Combatant> heros;
-    private List<Combatant> enemies;
 
 
     // Méthodes d'affichage
@@ -220,9 +211,7 @@ public class Game {
     //    "com.isep.utils", en s'inspirant de "InputParser" (méthodes de saisie)
 
     public static void displayStatus(List<Combatant> h, List<Combatant> e) {
-        /*for (int i = 0 ; i<5;i++){
-            System.out.println();
-        }*/
+
         System.out.println("------------------------------------------------------------------------");
         System.out.print(" Heros : ");
         for (Combatant c: h) {
