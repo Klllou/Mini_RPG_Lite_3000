@@ -1,5 +1,7 @@
 package com.isep.rpg;
 
+import java.util.List;
+
 public class Dragon extends Enemy {
 
         public Dragon() {
@@ -9,7 +11,7 @@ public class Dragon extends Enemy {
         }
 
         @Override
-        public void doAction(Combatant badOne) {
+        public void doAction(List<Combatant> enemies,List<Combatant> heros, int ixHero) {
 
         }
 

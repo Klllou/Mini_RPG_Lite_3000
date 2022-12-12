@@ -39,7 +39,6 @@ public class Game {
             System.out.println("What's your name ?");
             name = scanner.nextLine();
             switch(herosClass){
-
                 case "Warrior","warrior","1":
                     hero = new Warrior(name);
                     hero.setWeapon("Sword", 5);
@@ -90,6 +89,12 @@ public class Game {
     }
 
     public void start() {
+        System.out.println("Hi there Adventurer, you're mission will be, if you accept it... \ni hope you will... it's important you know.. but i'll understand if you prefer to sleep away your problems..\nAnyway..." +
+                "\nYou will have to save the \uD83C\uDF0FWorld from the Massive invasion of \uD83D\uDC7EMonsters." +
+                "\nTo do so, choose your \uD83E\uDDB8heros (the number of ennemies will vary according to the number of heros..). \n" +
+                "Each \uD83E\uDDB8Hero will have 5 \uD83C\uDF72meals with him, spellcaster will also be given 5 ⚗potions each to regenerate their \uD83D\uDCA7mana. ");
+        System.out.println("Now that you are more aware of the current situation of the \uD83C\uDF0Fworld, i will let you begin your \uD83D\uDDFAadventure");
+        System.out.println();
         Random random = new Random();
         int ixHero = 0;
         int ixEnemy = 0;
@@ -108,29 +113,19 @@ public class Game {
 
                 // Attaque du Hero
                 System.out.println("It's " + goodOne.getName() + "'s turn to do an action");
-                System.out.println(goodOne.getName() + " will target " + badOne.getName());
-                goodOne.doAction(badOne);
-                displayMessage("> "+goodOne.getName() + " attack " + badOne.getName() + " ! " );
-                if (badOne.getHealthPoint() <= 0) {
-                    displayMessage("Yeay! " + goodOne.getName()
-                            + " has defeat " + badOne.getName() + ".");
-                    enemies.remove(ixEnemy);
-                    ixEnemy--; // Correction: évite que le suivant perde son tour
-                } else {
+                goodOne.doAction(enemies, heros, ixHero);
 
-                    // Riposte du Méchant, s'il n'est pas vaincu
-                    displayMessage("> " + badOne.getName()
-                            + " attack " + goodOne.getName() + " ! ");
-                    badOne.fight(goodOne);
-
-                    if (goodOne.getHealthPoint() <= 0) {
-                        displayMessage
-                                (goodOne.getName() + " has found an honorable death...");
-                        heros.remove(ixHero);
-                        ixHero--;
-                    }
-
+                badOne.fight(goodOne);
+                displayMessage("> " + badOne.getName()
+                        + " attack " + goodOne.getName() + " ! ");
+                if (goodOne.getHealthPoint() <= 0) {
+                    displayMessage
+                            (goodOne.getName() + " has found an honorable death...");
+                    heros.remove(ixHero);
+                    ixHero--;
                 }
+
+               // }
 
                 // Tests de fin du jeu
                 if (heros.size() == 0) {
@@ -160,28 +155,17 @@ public class Game {
             // Attaque de l'ennemi
             System.out.println("It's " + goodOne.getName() + "'s turn to do an action");
             System.out.println(goodOne.getName() + " will target " + badOne.getName());
-            goodOne.doAction(badOne);
-            displayMessage(">" + goodOne.getName()
-                    + " attack " + badOne.getName());
-            if (badOne.getHealthPoint() <= 0) {
-                displayMessage("Yeay! " + goodOne.getName()
-                        + " has defeat " + badOne.getName() + ".");
-                enemies.remove(0);
-                //ixHero--; // Correction: évite que le suivant perde son tour
-            } else {
+            goodOne.doAction(enemies, heros, ixHero);
 
-                // Riposte du gentil, s'il n'est pas vaincu
-                displayMessage(">" +badOne.getName()
-                        + " attack " + goodOne.getName());
-                badOne.fight(goodOne);
-                if (goodOne.getHealthPoint() <= 0) {
-                    displayMessage
-                            (goodOne.getName() + " has found an honorable death...");
-                    heros.remove(ixHero);
-                    ixHero--;
-                }
-
-        }
+            badOne.fight(goodOne);
+            displayMessage(">" +badOne.getName()
+                    + " attack " + goodOne.getName());
+            if (goodOne.getHealthPoint() <= 0) {
+                displayMessage
+                        (goodOne.getName() + " has found an honorable death...");
+                heros.remove(ixHero);
+                ixHero--;
+            }
             // Tests de fin du jeu
 
             if (enemies.size() == 0) {

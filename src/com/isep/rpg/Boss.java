@@ -1,5 +1,7 @@
 package com.isep.rpg;
 
+import java.util.List;
+
 public class Boss extends Enemy{
 
     public Boss() {
@@ -9,7 +11,7 @@ public class Boss extends Enemy{
     }
 
     @Override
-    public void doAction(Combatant badOne) {
+    public void doAction(List<Combatant> list, List<Combatant> heros, int ixHero) {
 
     }
 }

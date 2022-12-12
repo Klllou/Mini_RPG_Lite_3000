@@ -1,5 +1,7 @@
 package com.isep.rpg;
 
+import java.util.List;
+
 public class Goblin extends Enemy{
     public Goblin() {
         // Le Goblin possède 3 points de vie et inflige 0 points de dégats
@@ -8,7 +10,7 @@ public class Goblin extends Enemy{
     }
 
     @Override
-    public void doAction(Combatant badOne) {
+    public void doAction(List<Combatant> list, List<Combatant> heros, int ixHero) {
 
     }
 }
