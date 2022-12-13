@@ -47,7 +47,6 @@ public abstract class Hero extends Combatant {
                         for (int k = 1; k<enemies.size()+1; k++){
                             System.out.println("    ("+ k + ")" + enemies.get(k-1).getName() +" ♥"+ enemies.get(k-1).getHealthPoint());
                         }
-                        System.out.println();
                         while(true) {
                             index = scanner.nextInt()-1;
                             if(index >= 0 && index<enemies.size()){
@@ -86,13 +85,13 @@ public abstract class Hero extends Combatant {
     // utilisation dépend du type du héro (une arme n'est pas utile à un mage)
 
     public void chooseReward(){
-        System.out.println("---------------------------------------");
+
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("Which reward do you want ?");
             System.out.println("    (1) increase ⚔Attack (+2\uD83D\uDCA5)");
             System.out.println("    (2) Earn a meal (+\uD83C\uDF721)");
-            System.out.println("    (3) increase meal effect (+♥2)");
+            System.out.println("    (3) increase meal efficiency (+♥2)");
             String reward = scanner.nextLine();
             switch (reward) {
                 case "1":
@@ -104,9 +103,6 @@ public abstract class Hero extends Combatant {
                 case "3":
                     for (int i = 0; i < food.size();i++)
                         food.get(i).setHpToHeal();
-                    return;
-                case "4":
-
                     return;
                 default:
                     System.out.println("Wrong input, try again");

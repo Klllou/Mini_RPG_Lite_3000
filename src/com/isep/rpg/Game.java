@@ -1,6 +1,8 @@
 
 package com.isep.rpg;
 
+import java.io.*;
+
 import com.isep.utils.InputParser;
 
 import java.util.ArrayList;
@@ -12,6 +14,15 @@ public class Game {
     int nbFight;
     private List<Combatant> heros;
     private List<Combatant> enemies;
+
+
+        // Declaring ANSI_RESET so that we can reset the color
+        public static final String ANSI_RESET = "\u001B[0m";
+
+        // Declaring the color
+        // Custom declaration
+        public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_GREEN = "\u001B[32m";
 
     public Game(InputParser inputParser) {
 
@@ -33,7 +44,7 @@ public class Game {
             String herosClass;
             while(true) {
                 herosClass = scanner.nextLine();
-                if(herosClass.equals("1") || herosClass.equals("2")|| herosClass.equals("3")|| herosClass.equals("4") || herosClass.equals("")){
+                if(herosClass.equals("1") || herosClass.equals("warrior") ||herosClass.equals("Warrior") || herosClass.equals("2")|| herosClass.equals("healer") ||herosClass.equals("Healer") ||herosClass.equals("3")|| herosClass.equals("mage") || herosClass.equals("Mage") || herosClass.equals("4") ||herosClass.equals("Hunter") || herosClass.equals("hunter") ||herosClass.equals("")){
                     break;
                 } else {
                     System.out.println("Wrong input, please choose again");
@@ -98,11 +109,11 @@ public class Game {
     }
 
     public void start() {
-        System.out.println("Hi there Adventurer, you're mission will be, if you accept it... \ni hope you will... it's important you know.. but i'll understand if you prefer to sleep away your problems..\nAnyway..." +
+        System.out.println(ANSI_GREEN + "Hi there Adventurer, you're mission will be, if you accept it... \ni hope you will... it's important you know.. but i'll understand if you prefer to sleep away your problems..\nAnyway..." +
                 "\nYou will have to save the \uD83C\uDF0FWorld from the Massive invasion of \uD83D\uDC7EMonsters." +
                 "\nTo do so, choose your \uD83E\uDDB8heros (the number of ennemies will vary according to the number of heros..). \n" +
-                "Each \uD83E\uDDB8Hero will have 5 \uD83C\uDF72meals with him, spellcaster will also be given 5 ⚗potions each to regenerate their \uD83D\uDCA7mana. ");
-        System.out.println("Now that you are more aware of the current situation of the \uD83C\uDF0Fworld, i will let you begin your \uD83D\uDDFAadventure");
+                "Each \uD83E\uDDB8Hero will have 5 \uD83C\uDF72meals with him, spellcaster will also be given 5 ⚗potions each to regenerate their \uD83D\uDCA7mana. " );
+        System.out.println("Now that you are more aware of the current situation of the \uD83C\uDF0Fworld, i will let you begin your \uD83D\uDDFAadventure"+ ANSI_RESET);
         System.out.println();
         Random random = new Random();
         int ixHero = 0;
@@ -153,7 +164,9 @@ public class Game {
                 ixHero = (ixHero + 1) % heros.size();
                 ixEnemy = (ixEnemy + 1) % enemies.size();
             }
+            System.out.println("############################################################################################");
             for (int n =0; n < heros.size();n++){
+                System.out.println("Since you won this fight, "+heros.get(n).getName()+" can choose a reward ! ");
                 heros.get(n).chooseReward();
             }
             nbFight++;

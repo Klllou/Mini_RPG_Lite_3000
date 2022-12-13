@@ -10,7 +10,7 @@ public class Hunter extends Hero{
         // Le guerrier possède 5 points de vie
         super(n, 4);
         this.sign = "\uD83C\uDFF9";
-        for (int i =0; i<2;i++) {
+        for (int i =0; i<20;i++) {
             arrows.add(new Arrow());
         }
     }
@@ -38,22 +38,30 @@ public class Hunter extends Hero{
                 case "1","attack":
                     if (enemies.size() == 1 ){
                         fight(enemies.get(0));
-                        useArrow();
                         System.out.println("> "+ heros.get(ixHero).getName() + " attack " + enemies.get(0).getName() + " ! " );
                         if (isAlive(enemies, 0)) {
+                            System.out.println(enemies.get(0).getName() + " has been defeat, well done !");
                             enemies.remove(0);
+
                         }
                     } else {
-                        System.out.println("Who do you want to attack (-" +  weapon.getDamagePoints()+"\uD83D\uDCA5) ");
+                        System.out.println("Who do you want to attack (-" +  weapon.getDamagePoints()+"\uD83D\uDCA5)");
                         for (int k = 1; k<enemies.size()+1; k++){
                             System.out.println("    ("+ k + ")" + enemies.get(k-1).getName() +" ♥"+ enemies.get(k-1).getHealthPoint());
                         }
-                        System.out.println();
-                        index = scanner.nextInt()-1;
+
+                        while(true) {
+                            index = scanner.nextInt()-1;
+                            if(index >= 0 && index<enemies.size()){
+                                break;
+                            } else {
+                                System.out.println("Wrong input, please choose again");
+                            }
+                        }
                         fight(enemies.get(index));
-                        useArrow();
                         System.out.println("> "+ heros.get(ixHero).getName() + " attack " + enemies.get(index).getName() + " ! " );
                         if (isAlive(enemies, index)) {
+                            System.out.println(enemies.get(index).getName() + " has been defeat, well done !");
                             enemies.remove(index);
                         }
                     }
@@ -78,5 +86,34 @@ public class Hunter extends Hero{
         }
     }
 
+    @Override
+    public void chooseReward(){
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.println("Which reward do you want ?");
+            System.out.println("    (1) increase ⚔Attack (+2\uD83D\uDCA5)");
+            System.out.println("    (2) Earn a meal (+\uD83C\uDF721)");
+            System.out.println("    (3) increase meal effect (+♥2)");
+            System.out.println("    (4) get new arrows (+5 arrows)");
+            String reward = scanner.nextLine();
+            switch (reward) {
+                case "1":
+                    this.weapon.increaseDamagePoints();
+                    return;
+                case "2":
+                    food.add(new Food("delicious Meal"));
+                    return;
+                case "3":
+                    for (Food value : food) value.setHpToHeal();
+                    return;
+                case "4":
+                    for (int i = 0; i < 5;i++)
+                        arrows.add(new Arrow());
+                    return;
+                default:
+                    System.out.println("Wrong input, try again");
+            }
+        }
+    }
 }
 
