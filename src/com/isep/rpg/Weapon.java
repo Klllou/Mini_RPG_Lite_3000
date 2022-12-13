@@ -7,6 +7,9 @@ public class Weapon extends Item {
         this.damagePoints = damagePoints;
     }
 
+    public void increaseDamagePoints(){
+        this.damagePoints = damagePoints+2;
+    }
     public int getDamagePoints() {
         return damagePoints;
     }

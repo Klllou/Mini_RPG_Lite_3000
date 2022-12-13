@@ -19,7 +19,7 @@ public abstract class Hero extends Combatant {
 
     public void useFood(){
         if (!food.isEmpty()){
-            this.gain(5);
+            this.gain(food.get(0).getHpToHeal());
             food.remove(0);
         }
     }
@@ -30,7 +30,7 @@ public abstract class Hero extends Combatant {
         while (true) {
             System.out.println("What do you want to do ?");
             System.out.println("    (1) ⚔Attack (-"+ weapon.getDamagePoints()+"\uD83D\uDCA5)");
-            System.out.println("    (2) \uD83C\uDF72Eat (+♥5)");
+            System.out.println("    (2) \uD83C\uDF72Eat (+"+ food.get(0).getHpToHeal()+"♥)");
             String action = scanner.nextLine();
             switch (action) {
                 case "1":
@@ -38,7 +38,9 @@ public abstract class Hero extends Combatant {
                         fight(enemies.get(0));
                         System.out.println("> "+ heros.get(ixHero).getName() + " attack " + enemies.get(0).getName() + " ! " );
                         if (isAlive(enemies, 0)) {
+                            System.out.println(enemies.get(0).getName() + " has been defeat, well done !");
                             enemies.remove(0);
+
                         }
                     } else {
                         System.out.println("Who do you want to attack (-" +  weapon.getDamagePoints()+"\uD83D\uDCA5)");
@@ -46,10 +48,18 @@ public abstract class Hero extends Combatant {
                             System.out.println("    ("+ k + ")" + enemies.get(k-1).getName() +" ♥"+ enemies.get(k-1).getHealthPoint());
                         }
                         System.out.println();
-                        index = scanner.nextInt()-1;
+                        while(true) {
+                            index = scanner.nextInt()-1;
+                            if(index >= 0 && index<enemies.size()){
+                                break;
+                            } else {
+                                System.out.println("Wrong input, please choose again");
+                            }
+                        }
                         fight(enemies.get(index));
                         System.out.println("> "+ heros.get(ixHero).getName() + " attack " + enemies.get(index).getName() + " ! " );
                         if (isAlive(enemies, index)) {
+                            System.out.println(enemies.get(index).getName() + " has been defeat, well done !");
                             enemies.remove(index);
                         }
                     }
@@ -68,10 +78,39 @@ public abstract class Hero extends Combatant {
         this.weapon = new Weapon(weaponName, damagePoints);
     }
 
+
     public void setArmor(String armorName, int armorPoints){
         this.armor = new Armor(armorName, armorPoints);
     }
     // Abstrait car n'importe quel hero peut prendre un objet mais son
     // utilisation dépend du type du héro (une arme n'est pas utile à un mage)
 
+    public void chooseReward(){
+        System.out.println("---------------------------------------");
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.println("Which reward do you want ?");
+            System.out.println("    (1) increase ⚔Attack (+2\uD83D\uDCA5)");
+            System.out.println("    (2) Earn a meal (+\uD83C\uDF721)");
+            System.out.println("    (3) increase meal effect (+♥2)");
+            String reward = scanner.nextLine();
+            switch (reward) {
+                case "1":
+                   this.weapon.increaseDamagePoints();
+                    return;
+                case "2":
+                    food.add(new Food("delicious Meal"));
+                    return;
+                case "3":
+                    for (int i = 0; i < food.size();i++)
+                        food.get(i).setHpToHeal();
+                    return;
+                case "4":
+
+                    return;
+                default:
+                    System.out.println("Wrong input, try again");
+            }
+        }
+    }
 }

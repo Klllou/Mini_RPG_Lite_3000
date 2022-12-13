@@ -15,6 +15,11 @@ public class Dragon extends Enemy {
 
         }
 
+        @Override
+        public void chooseReward() {
+
+        }
+
 // Implémentation de la méthode abstraite "fight" par le dragon
         /*@Override
         public void fight(Combatant combatant) {

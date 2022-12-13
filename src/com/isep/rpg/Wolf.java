@@ -13,5 +13,9 @@ public class Wolf extends Enemy{
     public void doAction(List<Combatant> list, List<Combatant> heros, int ixHero) {
 
     }
+    @Override
+    public void chooseReward() {
+
+    }
 }
 

@@ -30,8 +30,17 @@ public class Game {
             System.out.println("     (2) ⚕Healer");
             System.out.println("     (3) \uD83E\uDDD9Mage");
             System.out.println("     (4) \uD83C\uDFF9Hunter");
-            String herosClass = scanner.nextLine();
-            if (herosClass == "") {
+            String herosClass;
+            while(true) {
+                herosClass = scanner.nextLine();
+                if(herosClass.equals("1") || herosClass.equals("2")|| herosClass.equals("3")|| herosClass.equals("4") || herosClass.equals("")){
+                    break;
+                } else {
+                    System.out.println("Wrong input, please choose again");
+                }
+            }
+
+            if (herosClass.equals("")) {
                 return;
             }
             Hero hero = null;
@@ -114,16 +123,18 @@ public class Game {
                 // Attaque du Hero
                 System.out.println("It's " + goodOne.getName() + "'s turn to do an action");
                 goodOne.doAction(enemies, heros, ixHero);
-
-                badOne.fight(goodOne);
-                displayMessage("> " + badOne.getName()
-                        + " attack " + goodOne.getName() + " ! ");
-                if (goodOne.getHealthPoint() <= 0) {
-                    displayMessage
-                            (goodOne.getName() + " has found an honorable death...");
-                    heros.remove(ixHero);
-                    ixHero--;
+                if (badOne.getHealthPoint()>0){
+                    badOne.fight(goodOne);
+                    displayMessage("> " + badOne.getName()
+                            + " attack " + goodOne.getName() + " ! ");
+                    if (goodOne.getHealthPoint() <= 0) {
+                        displayMessage
+                                (goodOne.getName() + " has found an honorable death...");
+                        heros.remove(ixHero);
+                        ixHero--;
+                    }
                 }
+
 
                // }
 
@@ -142,6 +153,9 @@ public class Game {
                 ixHero = (ixHero + 1) % heros.size();
                 ixEnemy = (ixEnemy + 1) % enemies.size();
             }
+            for (int n =0; n < heros.size();n++){
+                heros.get(n).chooseReward();
+            }
             nbFight++;
         }
         //combat du Boss
@@ -157,14 +171,16 @@ public class Game {
             System.out.println(goodOne.getName() + " will target " + badOne.getName());
             goodOne.doAction(enemies, heros, ixHero);
 
-            badOne.fight(goodOne);
-            displayMessage(">" +badOne.getName()
-                    + " attack " + goodOne.getName());
-            if (goodOne.getHealthPoint() <= 0) {
-                displayMessage
-                        (goodOne.getName() + " has found an honorable death...");
-                heros.remove(ixHero);
-                ixHero--;
+            if (badOne.getHealthPoint()>0){
+                badOne.fight(goodOne);
+                displayMessage("> " + badOne.getName()
+                        + " attack " + goodOne.getName() + " ! ");
+                if (goodOne.getHealthPoint() <= 0) {
+                    displayMessage
+                            (goodOne.getName() + " has found an honorable death...");
+                    heros.remove(ixHero);
+                    ixHero--;
+                }
             }
             // Tests de fin du jeu
 

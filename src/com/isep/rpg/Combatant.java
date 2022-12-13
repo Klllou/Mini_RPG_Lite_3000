@@ -54,4 +54,5 @@ public abstract class Combatant {
 
     }
     public abstract void doAction(List<Combatant> enemies,List<Combatant> heros, int ixHero);
+    public abstract void chooseReward();
 }
