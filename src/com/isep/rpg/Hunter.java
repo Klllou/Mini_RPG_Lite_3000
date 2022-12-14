@@ -37,8 +37,11 @@ public class Hunter extends Hero{
             switch (action) {
                 case "1","attack":
                     if (enemies.size() == 1 ){
+                        for (int n = 0 ; n<5; n++){
+                            System.out.println();
+                        }
                         fight(enemies.get(0));
-                        System.out.println("> "+ heros.get(ixHero).getName() + " attack " + enemies.get(0).getName() + " ! " );
+                        System.out.println("> "+ heros.get(ixHero).getName() + " attack " + enemies.get(0).getName() + " ! (-"+weapon.getDamagePoints()+"\uD83D\uDCA5)" );
                         if (isAlive(enemies, 0)) {
                             System.out.println(enemies.get(0).getName() + " has been defeat, well done !");
                             enemies.remove(0);
@@ -58,8 +61,11 @@ public class Hunter extends Hero{
                                 System.out.println("Wrong input, please choose again");
                             }
                         }
+                        for (int n = 0 ; n<5; n++){
+                            System.out.println();
+                        }
                         fight(enemies.get(index));
-                        System.out.println("> "+ heros.get(ixHero).getName() + " attack " + enemies.get(index).getName() + " ! " );
+                        System.out.println("> "+ heros.get(ixHero).getName() + " attack " + enemies.get(index).getName() + " ! (-"+weapon.getDamagePoints()+"\uD83D\uDCA5)" );
                         if (isAlive(enemies, index)) {
                             System.out.println(enemies.get(index).getName() + " has been defeat, well done !");
                             enemies.remove(index);

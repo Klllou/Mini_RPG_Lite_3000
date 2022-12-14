@@ -16,13 +16,11 @@ public class Game {
     private List<Combatant> enemies;
 
 
-        // Declaring ANSI_RESET so that we can reset the color
-        public static final String ANSI_RESET = "\u001B[0m";
+    // Declaring RESET so that we can reset the color
+    public final String RESET = "\u001B[0m";
+    // Declaring the color
+    public final String GREEN = "\u001B[32m";
 
-        // Declaring the color
-        // Custom declaration
-        public static final String ANSI_PURPLE = "\u001B[35m";
-    public static final String ANSI_GREEN = "\u001B[32m";
 
     public Game(InputParser inputParser) {
 
@@ -36,7 +34,7 @@ public class Game {
     private void initializeHeros(){
         while (true){
             Scanner scanner = new Scanner(System.in);
-            System.out.println("> Choose a class or press enter to continue.");
+            System.out.println("> Choose a class or"+ GREEN +  " press enter to continue." + RESET);
             System.out.println("     (1) \uD83D\uDDE1Warrior ");
             System.out.println("     (2) ⚕Healer");
             System.out.println("     (3) \uD83E\uDDD9Mage");
@@ -109,18 +107,26 @@ public class Game {
     }
 
     public void start() {
-        System.out.println(ANSI_GREEN + "Hi there Adventurer, you're mission will be, if you accept it... \ni hope you will... it's important you know.. but i'll understand if you prefer to sleep away your problems..\nAnyway..." +
+        System.out.println("Hi there Adventurer, you're mission will be, if you accept it... \ni hope you will... it's important you know.. but i'll understand if you prefer to sleep away your problems..\nAnyway..." +
                 "\nYou will have to save the \uD83C\uDF0FWorld from the Massive invasion of \uD83D\uDC7EMonsters." +
                 "\nTo do so, choose your \uD83E\uDDB8heros (the number of ennemies will vary according to the number of heros..). \n" +
                 "Each \uD83E\uDDB8Hero will have 5 \uD83C\uDF72meals with him, spellcaster will also be given 5 ⚗potions each to regenerate their \uD83D\uDCA7mana. " );
-        System.out.println("Now that you are more aware of the current situation of the \uD83C\uDF0Fworld, i will let you begin your \uD83D\uDDFAadventure"+ ANSI_RESET);
+        System.out.println("Now that you are more aware of the current situation of the \uD83C\uDF0Fworld, i will let you begin your \uD83D\uDDFAadventure");
         System.out.println();
         Random random = new Random();
         int ixHero = 0;
-        int ixEnemy = 0;
+        int ixEnemy;
+
+        //Création de la liste des héros
         initializeHeros();
+
+        //Boucle de 4 combats Avant le Combat final contre le BOSS
         for(int i = 0; i<4;i++){
+
+            //Création de la liste d'ennemies
             initializeEnemies();
+
+            // Détermination de quel ennemie et quel héro commence à attaquer
             ixHero = random.nextInt(heros.size());
             ixEnemy = random.nextInt(enemies.size());
             // Boucle de jeu
@@ -134,28 +140,25 @@ public class Game {
                 // Attaque du Hero
                 System.out.println("It's " + goodOne.getName() + "'s turn to do an action");
                 goodOne.doAction(enemies, heros, ixHero);
+                //Riposte de L'ennemie si encore vivant
                 if (badOne.getHealthPoint()>0){
                     badOne.fight(goodOne);
-                    displayMessage("> " + badOne.getName()
-                            + " attack " + goodOne.getName() + " ! ");
+                    displayMessage("> "+ badOne.getName()
+                            + " attack " + goodOne.getName() + " ! (-"+ badOne.damagePoints+ "♥)");
                     if (goodOne.getHealthPoint() <= 0) {
-                        displayMessage
-                                (goodOne.getName() + " has found an honorable death...");
+                        displayMessage(goodOne.getName() + " has found an honorable death...");
                         heros.remove(ixHero);
                         ixHero--;
                     }
                 }
-
-
-               // }
-
-                // Tests de fin du jeu
+            //Tests de fin du jeu
                 if (heros.size() == 0) {
+                    System.out.println("############################################################################################");
                     displayMessage("All the heros have been defeat... RUN FOR YOUR LIFEEE AAAAAAAAAAAAHHHHHHHHHHHHHHHH");
                     break;
                 }
                 if (enemies.size() == 0) {
-
+                    System.out.println("############################################################################################");
                     displayMessage("Congratulations fellow adventurer(s)! You can now proceed with the next fight.");
                     break;
                 }
@@ -164,11 +167,13 @@ public class Game {
                 ixHero = (ixHero + 1) % heros.size();
                 ixEnemy = (ixEnemy + 1) % enemies.size();
             }
-            System.out.println("############################################################################################");
+            //Méchanisme de récompenses
+
             for (int n =0; n < heros.size();n++){
                 System.out.println("Since you won this fight, "+heros.get(n).getName()+" can choose a reward ! ");
                 heros.get(n).chooseReward();
             }
+            //permet de rajouter un ennemie à chaque fois que la boucle se répète
             nbFight++;
         }
         //combat du Boss

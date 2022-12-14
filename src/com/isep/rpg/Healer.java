@@ -28,15 +28,18 @@ public class Healer extends SpellCaster {
         while (true) {
             System.out.println("You have  \uD83D\uDCA7"+ mana + " mana left, what do you want to do ?");
             System.out.println("    (1) ⚔Attack (-"+ weapon.getDamagePoints()+"\uD83D\uDCA5)");
-            System.out.println("    (2) Heal (-15 \uD83D\uDCA7mana)");
+            System.out.println("    (2) Heal (-15 \uD83D\uDCA7mana) (+♥5)");
             System.out.println("    (3) \uD83C\uDF72Eat (+♥5)");
             System.out.println("    (4) Use ⚗Potion  (+\uD83D\uDCA720)");
             String action = scanner.nextLine();
             switch (action) {
                 case "1":
                     if (enemies.size() == 1 ){
+                        for (int n = 0 ; n<5; n++){
+                            System.out.println();
+                        }
                         fight(enemies.get(0));
-                        System.out.println("> "+ heros.get(ixHero).getName() + " attack " + enemies.get(0).getName() + " ! " );
+                        System.out.println("> "+ heros.get(ixHero).getName() + " attack " + enemies.get(0).getName() + " ! (-"+weapon.getDamagePoints()+"\uD83D\uDCA5)" );
                         if (isAlive(enemies, 0)) {
                             System.out.println(enemies.get(0).getName() + " has been defeat, well done !");
                             enemies.remove(0);
@@ -55,8 +58,11 @@ public class Healer extends SpellCaster {
                                 System.out.println("Wrong input, please choose again");
                             }
                         }
+                        for (int n = 0 ; n<5; n++){
+                            System.out.println();
+                        }
                         fight(enemies.get(index));
-                        System.out.println("> "+ heros.get(ixHero).getName() + " attack " + enemies.get(index).getName() + " ! " );
+                        System.out.println("> "+ heros.get(ixHero).getName() + " attack " + enemies.get(index).getName() + " ! (-"+weapon.getDamagePoints()+"\uD83D\uDCA5)" );
                         if (isAlive(enemies, index)) {
                             System.out.println(enemies.get(index).getName() + " has been defeat, well done !");
                             enemies.remove(index);
@@ -124,6 +130,7 @@ public class Healer extends SpellCaster {
             }
         }
     }
+
 
 }
 

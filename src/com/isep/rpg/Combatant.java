@@ -42,11 +42,10 @@ public abstract class Combatant {
 
 
     public void useFood() {
-        gain(3 );
+        gain(5 );
     }
     public void healerHeal() {
         gain(5);
-
     }
     public boolean isAlive(List<Combatant> enemies, int index) {
         return enemies.get(index).getHealthPoint() <= 0;
