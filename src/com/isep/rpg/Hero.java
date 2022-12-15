@@ -9,12 +9,14 @@ public abstract class Hero extends Combatant {
     Weapon weapon;
     Armor armor;
 
+
     List<Food> food = new ArrayList<>();
     public Hero(String n, int h) {
         super(n, h);
         for (int i =0; i<5;i++) {
             food.add(new Food("delicious Meal"));
         }
+        this.maxHp = 100;
     }
     @Override
     public void useFood(){
@@ -98,7 +100,7 @@ public abstract class Hero extends Combatant {
             String reward = scanner.nextLine();
             switch (reward) {
                 case "1":
-                   this.weapon.increaseDamagePoints();
+                    this.weapon.increaseDamagePoints();
                     return;
                 case "2":
                     food.add(new Food("delicious Meal"));

@@ -5,9 +5,10 @@ import java.util.List;
 public class Dragon extends Enemy {
 
         public Dragon() {
-        // Le dragon possède 5 points de vie et inflige 3 points de dégats
-        super( "dragon",10, 0);
-        this.sign = "\uD83D\uDC09";
+                // Le dragon possède 5 points de vie et inflige 3 points de dégats
+                super( "dragon",150, 5);
+                this.sign = "\uD83D\uDC09";
+                this.maxHp = 150;
         }
 
         @Override

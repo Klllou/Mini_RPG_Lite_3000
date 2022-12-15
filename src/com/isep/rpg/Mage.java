@@ -9,8 +9,9 @@ public class Mage extends SpellCaster{
 
     public Mage(String n) {
         // Le guerrier possède 5 points de vie
-        super(n, 3);
+        super(n, 60);
         this.sign = "\uD83E\uDDD9";
+        this.maxHp = 60;
     }
 
     // Implémentation de la méthode abstraite "fight" par le guerrier
@@ -30,7 +31,7 @@ public class Mage extends SpellCaster{
         while (true) {
             System.out.println("you have  \uD83D\uDCA7" + mana + " mana left, what do you want to do ?");
             System.out.println("    (1) Attack (-5 \uD83D\uDCA7mana) (-"+ weapon.getDamagePoints()+"\uD83D\uDCA5)");
-            System.out.println("    (2) \uD83C\uDF72Eat (+♥5)");
+            System.out.println("    (2) \uD83C\uDF72Eat (+♥40)");
             System.out.println("    (3) Use ⚗Potion (+\uD83D\uDCA720)");
             String action = scanner.nextLine();
             switch (action) {
@@ -96,7 +97,7 @@ public class Mage extends SpellCaster{
             System.out.println("    (1) increase ⚔Attack (+2\uD83D\uDCA5)");
             System.out.println("    (2) Earn a meal (+\uD83C\uDF721)");
             System.out.println("    (3) Earn a suspicious Potion (+⚗1)");
-            System.out.println("    (4) increase meal efficiency (+♥2)");
+            System.out.println("    (4) increase meal efficiency (+♥5)");
             System.out.println("    (5) increase potion efficiency (+\uD83D\uDCA75)");
             String reward = scanner.nextLine();
             switch (reward) {

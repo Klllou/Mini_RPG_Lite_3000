@@ -9,6 +9,7 @@ public abstract class Combatant {
     private String name;
 
     String sign;
+    int maxHp;
 
     public Combatant(String name, int healthPoint){
         this.name = name;
@@ -42,11 +43,20 @@ public abstract class Combatant {
 
 
     public void useFood() {
-        gain(5 );
+        if ((this.getHealthPoint()+40) > this.maxHp) {
+            this.healthPoint = this.maxHp;
+        } else {
+            gain(40 );
+        }
     }
     public void healerHeal() {
-        gain(5);
+        if ((this.getHealthPoint()+20) > this.maxHp) {
+            this.healthPoint = this.maxHp;
+        } else {
+            gain(20);
+        }
     }
+
     public boolean isAlive(List<Combatant> enemies, int index) {
         return enemies.get(index).getHealthPoint() <= 0;
 

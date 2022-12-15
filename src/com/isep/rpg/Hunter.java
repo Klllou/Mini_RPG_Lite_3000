@@ -8,11 +8,12 @@ public class Hunter extends Hero{
     List<Arrow> arrows = new ArrayList<>();
     public Hunter(String n) {
         // Le guerrier possède 5 points de vie
-        super(n, 4);
+        super(n, 70);
         this.sign = "\uD83C\uDFF9";
         for (int i =0; i<20;i++) {
             arrows.add(new Arrow());
         }
+        this.maxHp = 70;
     }
 
     // Implémentation de la méthode abstraite "fight" par le guerrier
@@ -32,7 +33,7 @@ public class Hunter extends Hero{
         while (true) {
             System.out.println("What do you want to do ?");
             System.out.println("    (1) ⚔Attack (-"+ weapon.getDamagePoints()+"\uD83D\uDCA5) ");
-            System.out.println("    (2) \uD83C\uDF72Eat (+♥5)");
+            System.out.println("    (2) \uD83C\uDF72Eat (+♥40)");
             String action = scanner.nextLine();
             switch (action) {
                 case "1","attack":
@@ -40,6 +41,7 @@ public class Hunter extends Hero{
                         for (int n = 0 ; n<5; n++){
                             System.out.println();
                         }
+                        useArrow();
                         fight(enemies.get(0));
                         System.out.println("> "+ heros.get(ixHero).getName() + " attack " + enemies.get(0).getName() + " ! (-"+weapon.getDamagePoints()+"\uD83D\uDCA5)" );
                         if (isAlive(enemies, 0)) {
@@ -64,6 +66,7 @@ public class Hunter extends Hero{
                         for (int n = 0 ; n<5; n++){
                             System.out.println();
                         }
+                        useArrow();
                         fight(enemies.get(index));
                         System.out.println("> "+ heros.get(ixHero).getName() + " attack " + enemies.get(index).getName() + " ! (-"+weapon.getDamagePoints()+"\uD83D\uDCA5)" );
                         if (isAlive(enemies, index)) {
@@ -86,7 +89,7 @@ public class Hunter extends Hero{
             arrows.remove(0);
             System.out.println((arrows.size()+1)+ " arrows left");
         } else {
-            weapon = (new Weapon("dague", 4));
+            weapon = (new Weapon("dague", 15));
             System.out.println("The Hunter don't have arrows anymore");
             System.out.println("He will now use his \uD83D\uDDE1dagger");
         }
@@ -99,7 +102,7 @@ public class Hunter extends Hero{
             System.out.println("Which reward do you want ?");
             System.out.println("    (1) increase ⚔Attack (+2\uD83D\uDCA5)");
             System.out.println("    (2) Earn a meal (+\uD83C\uDF721)");
-            System.out.println("    (3) increase meal effect (+♥2)");
+            System.out.println("    (3) increase meal effect (+♥5)");
             System.out.println("    (4) get new arrows (+5 arrows)");
             String reward = scanner.nextLine();
             switch (reward) {

@@ -59,20 +59,20 @@ public class Game {
             switch(herosClass){
                 case "Warrior","warrior","1":
                     hero = new Warrior(name);
-                    hero.setWeapon("Sword", 5);
+                    hero.setWeapon("Sword", 20);
                     hero.setArmor("steel Armor", 2);
                     break;
                 case "Healer", "healer", "2":
                     hero = new Healer(name);
-                    hero.setWeapon("Stick", 2);
+                    hero.setWeapon("Stick", 10);
                     break;
                 case "Mage","mage","3":
                     hero = new Mage(name);
-                    hero.setWeapon("MagicWand", 7);
+                    hero.setWeapon("MagicWand", 40);
                     break;
                 case "Hunter","hunter","4":
                     hero = new Hunter(name);
-                    hero.setWeapon("Bow", 6);
+                    hero.setWeapon("Bow", 30);
                     break;
                 default:
                     System.out.println("Wrong input, try again");
@@ -151,7 +151,7 @@ public class Game {
                         ixHero--;
                     }
                 }
-            //Tests de fin du jeu
+                //Tests de fin du jeu
                 if (heros.size() == 0) {
                     System.out.println("############################################################################################");
                     displayMessage("All the heros have been defeat... RUN FOR YOUR LIFEEE AAAAAAAAAAAAHHHHHHHHHHHHHHHH");
@@ -176,6 +176,7 @@ public class Game {
             //permet de rajouter un ennemie à chaque fois que la boucle se répète
             nbFight++;
         }
+
         //combat du Boss
         Enemy enemy = new Boss();
         enemies.add(enemy);
@@ -233,12 +234,12 @@ public class Game {
         System.out.println("------------------------------------------------------------------------");
         System.out.print(" Heros : ");
         for (Combatant c: h) {
-            System.out.print(c.getName() + "(" + c.getHealthPoint()+ "♥) ");
+            System.out.print(c.getName() + "(♥" + c.getHealthPoint()+ "/" + c.maxHp+ ") ");
         }
         System.out.println();
         System.out.print(" Enemies : ");
         for (Combatant c: e) {
-            System.out.print(c.getName() + "(" + c.getHealthPoint() + "♥) ");
+            System.out.print(c.getName() + "(♥" + c.getHealthPoint()+ "/" + c.maxHp+ ") ");
         }
         System.out.println();
         System.out.println("------------------------------------------------------------------------");

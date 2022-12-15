@@ -4,7 +4,7 @@ public class Warrior extends Hero {
 
     public Warrior(String n) {
         // Le guerrier possède 5 points de vie
-        super(n, 5);
+        super(n, 100);
         this.sign = "\uD83D\uDDE1";
     }
 
