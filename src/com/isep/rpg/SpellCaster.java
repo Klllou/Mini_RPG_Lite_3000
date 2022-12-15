@@ -22,8 +22,8 @@ public abstract class SpellCaster extends Hero {
 
     public void usePotion(){
         if (!potions.isEmpty()){
-            if ((this.getMana()+20) > this.maxMana) {
-                this.mana = this.maxHp;
+            if ((this.getMana()+20) >= this.maxMana) {
+                this.mana = this.maxMana;
             } else {
                 this.mana += potions.get(0).getManaToRegenerate();
             }

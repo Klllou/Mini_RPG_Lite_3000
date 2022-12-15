@@ -27,10 +27,10 @@ public abstract class Combatant {
     //public abstract void fight(Combatant combatant);
 
     public void lose(int hp){
-        healthPoint -= hp;
+        this.healthPoint -= hp;
     }
     public void gain(int hp){
-        healthPoint += hp;
+        this.healthPoint += hp;
     }
     public int getDamagePoints() {
         return this.damagePoints;
@@ -43,25 +43,27 @@ public abstract class Combatant {
 
 
     public void useFood() {
-        if ((this.getHealthPoint()+40) > this.maxHp) {
+        if ((this.getHealthPoint()+40) >= this.maxHp) {
             this.healthPoint = this.maxHp;
         } else {
             gain(40 );
         }
     }
     public void healerHeal() {
-        if ((this.getHealthPoint()+20) > this.maxHp) {
+        if ((this.getHealthPoint()+30) >= this.maxHp) {
             this.healthPoint = this.maxHp;
         } else {
-            gain(20);
+            gain(30);
         }
     }
 
     public boolean isAlive(List<Combatant> enemies, int index) {
         return enemies.get(index).getHealthPoint() <= 0;
-
-
     }
     public abstract void doAction(List<Combatant> enemies,List<Combatant> heros, int ixHero);
     public abstract void chooseReward();
+
+    protected void usePotion() {
+
+    }
 }

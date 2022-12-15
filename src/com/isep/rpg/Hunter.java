@@ -76,7 +76,7 @@ public class Hunter extends Hero{
                     }
                     return;
                 case "2","eat":
-                    useFood();
+                    heros.get(ixHero).useFood();
                     System.out.println("> "+ heros.get(ixHero).getName() + " has eaten a delicious \uD83C\uDF72meal !" );
                     return;
                 default:

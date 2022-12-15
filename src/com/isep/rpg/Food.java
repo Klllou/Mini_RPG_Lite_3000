@@ -6,7 +6,7 @@ public class Food extends Consumable {
     private int hpToHeal;
     public Food(String name) {
         super(name);
-        this.hpToHeal = 5;
+        this.hpToHeal = 40;
     }
 
     public int getHpToHeal() {

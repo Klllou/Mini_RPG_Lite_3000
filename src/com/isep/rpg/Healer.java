@@ -29,9 +29,9 @@ public class Healer extends SpellCaster {
         while (true) {
             System.out.println("You have  \uD83D\uDCA7"+ mana + " mana left, what do you want to do ?");
             System.out.println("    (1) ⚔Attack (-"+ weapon.getDamagePoints()+"\uD83D\uDCA5)");
-            System.out.println("    (2) Heal (-15 \uD83D\uDCA7mana) (+♥20)");
+            System.out.println("    (2) Heal (-15 \uD83D\uDCA7mana) (+♥30)");
             System.out.println("    (3) \uD83C\uDF72Eat (+♥40)");
-            System.out.println("    (4) Use ⚗Potion  (+\uD83D\uDCA720)");
+            System.out.println("    (4) Use ⚗Potion (+\uD83D\uDCA720)");
             String action = scanner.nextLine();
             switch (action) {
                 case "1":
@@ -87,12 +87,17 @@ public class Healer extends SpellCaster {
                     }
                     return;
                 case "3":
-                    useFood();
+                    heros.get(ixHero).useFood();
                     System.out.println("> "+ heros.get(ixHero).getName() + " has eaten a delicious \uD83C\uDF72meal !" );
                     return;
                 case "4","use potion":
-                    usePotion();
-                    System.out.println("> "+ heros.get(ixHero).getName() + " has drunk a suspicious ⚗Potion.. But he recovered some mana !" );
+                    heros.get(ixHero).usePotion();
+                    if (!potions.isEmpty()){
+                        System.out.println("> "+ heros.get(ixHero).getName() + " has drunk a suspicious ⚗potion.. But he recovered some mana !" );
+                    } else {
+                        System.out.println("> "+ heros.get(ixHero).getName() + " don't have any ⚗potion left..");
+                    }
+
                     return;
                 default:
                     System.out.println("Wrong input, try again");

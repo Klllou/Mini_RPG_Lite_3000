@@ -18,13 +18,6 @@ public abstract class Hero extends Combatant {
         }
         this.maxHp = 100;
     }
-    @Override
-    public void useFood(){
-        if (!food.isEmpty()){
-            this.gain(food.get(0).getHpToHeal());
-            food.remove(0);
-        }
-    }
 
     public void doAction(List<Combatant> enemies, List<Combatant> heros, int ixHero){
         Scanner scanner = new Scanner(System.in);
@@ -69,7 +62,7 @@ public abstract class Hero extends Combatant {
                     }
                     return;
                 case "2":
-                    useFood();
+                    heros.get(ixHero).useFood();
                     System.out.println("> "+ heros.get(ixHero).getName() + " has eaten a delicious \uD83C\uDF72meal !" );
                     return;
                 default:

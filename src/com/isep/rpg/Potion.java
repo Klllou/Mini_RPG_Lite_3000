@@ -11,7 +11,7 @@ public class Potion extends Consumable {
     }
 
     public int getManaToRegenerate() {
-        return manaToRegenerate;
+        return this.manaToRegenerate;
     }
     public void setManaToRegenerate(){
         this.manaToRegenerate = manaToRegenerate+5;

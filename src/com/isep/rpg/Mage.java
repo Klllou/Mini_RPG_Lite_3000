@@ -77,12 +77,16 @@ public class Mage extends SpellCaster{
                     }
                     return;
                 case "2","eat":
-                    useFood();
+                    heros.get(ixHero).useFood();
                     System.out.println("> "+ heros.get(ixHero).getName() + " has eaten a delicious \uD83C\uDF72meal !" );
                     return;
                 case "3","use potion":
                     usePotion();
-                    System.out.println("> "+ heros.get(ixHero).getName() + " has drunk a suspicious ⚗Potion.. But he recovered some mana !" );
+                    if (!potions.isEmpty()){
+                        System.out.println("> "+ heros.get(ixHero).getName() + " has drunk a suspicious ⚗potion.. But he recovered some mana !" );
+                    } else {
+                        System.out.println("> "+ heros.get(ixHero).getName() + " don't have any ⚗potion left..");
+                    }
                     return;
                 default:
                     System.out.println("Wrong input, try again");
