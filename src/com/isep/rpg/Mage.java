@@ -29,6 +29,7 @@ public class Mage extends SpellCaster{
         Scanner scanner = new Scanner(System.in);
         int index;
         while (true) {
+            System.out.println("He has \uD83C\uDF72" + food.size()+ " left and ⚗"+ potions.size()+" left.");
             System.out.println("you have  \uD83D\uDCA7" + mana + " mana left, what do you want to do ?");
             System.out.println("    (1) Attack (-5 \uD83D\uDCA7mana) (-"+ weapon.getDamagePoints()+"\uD83D\uDCA5)");
             System.out.println("    (2) \uD83C\uDF72Eat (+♥40)");

@@ -7,10 +7,10 @@ import java.util.Scanner;
 public abstract class Hero extends Combatant {
 
     Weapon weapon;
-    Armor armor;
 
 
-    List<Food> food = new ArrayList<>();
+
+
     public Hero(String n, int h) {
         super(n, h);
         for (int i =0; i<5;i++) {
@@ -23,6 +23,7 @@ public abstract class Hero extends Combatant {
         Scanner scanner = new Scanner(System.in);
         int index;
         while (true) {
+            System.out.println("He has \uD83C\uDF72" + food.size()+ " left.");
             System.out.println("What do you want to do ?");
             System.out.println("    (1) ⚔Attack (-"+ weapon.getDamagePoints()+"\uD83D\uDCA5)");
             System.out.println("    (2) \uD83C\uDF72Eat (+"+ food.get(0).getHpToHeal()+"♥)");
@@ -76,9 +77,7 @@ public abstract class Hero extends Combatant {
     }
 
 
-    public void setArmor(String armorName, int armorPoints){
-        this.armor = new Armor(armorName, armorPoints);
-    }
+
     // Abstrait car n'importe quel hero peut prendre un objet mais son
     // utilisation dépend du type du héro (une arme n'est pas utile à un mage)
 

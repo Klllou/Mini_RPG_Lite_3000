@@ -1,12 +1,14 @@
 package com.isep.rpg;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Combatant {
     protected int damagePoints;
     private int healthPoint ;
     private String name;
+    List<Food> food = new ArrayList<>();
 
     String sign;
     int maxHp;
@@ -48,6 +50,7 @@ public abstract class Combatant {
         } else {
             gain(40 );
         }
+        food.remove(0);
     }
     public void healerHeal() {
         if ((this.getHealthPoint()+30) >= this.maxHp) {
@@ -64,6 +67,5 @@ public abstract class Combatant {
     public abstract void chooseReward();
 
     protected void usePotion() {
-
     }
 }
