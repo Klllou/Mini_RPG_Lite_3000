@@ -26,7 +26,9 @@ public abstract class Hero extends Combatant {
             System.out.println("He has \uD83C\uDF72" + food.size()+ " left.");
             System.out.println("What do you want to do ?");
             System.out.println("    (1) ⚔Attack (-"+ weapon.getDamagePoints()+"\uD83D\uDCA5)");
-            System.out.println("    (2) \uD83C\uDF72Eat (+"+ food.get(0).getHpToHeal()+"♥)");
+            if (!food.isEmpty()){
+                System.out.println("    (2) \uD83C\uDF72Eat (+"+ food.get(0).getHpToHeal()+"♥)");
+            }
             String action = scanner.nextLine();
             switch (action) {
                 case "1":

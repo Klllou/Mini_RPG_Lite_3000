@@ -15,11 +15,6 @@ public class Game {
     private List<Combatant> heros;
     private List<Combatant> enemies;
 
-    // Declaring RESET so that we can reset the color
-    public final String RESET = "\u001B[0m";
-    // Declaring the color
-    public final String GREEN = "\u001B[32m";
-
 
     public Game(InputParser inputParser) {
 
@@ -30,68 +25,72 @@ public class Game {
 
     }
 
-    private void initializeHeros(int nbHero){
-        for (int i=0;i<nbHero;i++){
+    private void initializeHeros(int nbHero) {
+        for (int i = 0; i < nbHero; i++) {
 
-                Scanner scanner = new Scanner(System.in);
-                System.out.println("> Choose a class");
-                System.out.println("     (1) \uD83D\uDDE1Warrior ");
-                System.out.println("     (2) ⚕Healer");
-                System.out.println("     (3) \uD83E\uDDD9Mage");
-                System.out.println("     (4) \uD83C\uDFF9Hunter");
-                String herosClass;
-                while(true) {
-                    herosClass = scanner.nextLine();
-                    if(herosClass.equals("1") || herosClass.equals("warrior") ||herosClass.equals("Warrior") || herosClass.equals("2")|| herosClass.equals("healer") ||herosClass.equals("Healer") ||herosClass.equals("3")|| herosClass.equals("mage") || herosClass.equals("Mage") || herosClass.equals("4") ||herosClass.equals("Hunter") || herosClass.equals("hunter") ||herosClass.equals("")){
-                        break;
-                    } else {
-                        System.out.println("Wrong input, please choose again");
-                    }
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("> Choose a class");
+            System.out.println("     (1) \uD83D\uDDE1Warrior ");
+            System.out.println("     (2) ⚕Healer");
+            System.out.println("     (3) \uD83E\uDDD9Mage");
+            System.out.println("     (4) \uD83C\uDFF9Hunter");
+            String herosClass;
+            while (true) {
+                herosClass = scanner.nextLine();
+                if (herosClass.equals("1") || herosClass.equals("warrior") || herosClass.equals("Warrior") ||
+                        herosClass.equals("2") || herosClass.equals("healer") || herosClass.equals("Healer") ||
+                        herosClass.equals("3") || herosClass.equals("mage") || herosClass.equals("Mage") ||
+                        herosClass.equals("4") || herosClass.equals("Hunter") || herosClass.equals("hunter") ||
+                        herosClass.equals("")) {
+                    break;
+                } else {
+                    System.out.println("Wrong input, please choose again");
                 }
+            }
 
-                if (herosClass.equals("")) {
-                    return;
-                }
-                Hero hero = null;
-                String name;
-                System.out.println("What's your name ?");
-                name = scanner.nextLine();
-                switch(herosClass){
-                    case "Warrior","warrior","1":
-                        hero = new Warrior(name);
-                        hero.setWeapon("Sword", 20);
-                        break;
-                    case "Healer", "healer", "2":
-                        hero = new Healer(name);
-                        hero.setWeapon("Stick", 10);
-                        break;
-                    case "Mage","mage","3":
-                        hero = new Mage(name);
-                        hero.setWeapon("MagicWand", 40);
-                        break;
-                    case "Hunter","hunter","4":
-                        hero = new Hunter(name);
-                        hero.setWeapon("Bow", 30);
-                        break;
-                    default:
-                        System.out.println("Wrong input, try again");
-                        break;
-                }
-                if (hero != null) {
-                    this.heros.add(hero);
-                }
+            if (herosClass.equals("")) {
+                return;
+            }
+            Hero hero = null;
+            String name;
+            System.out.println("What's your name ?");
+            name = scanner.nextLine();
+            switch (herosClass) {
+                case "Warrior", "warrior", "1":
+                    hero = new Warrior(name);
+                    hero.setWeapon("Sword", 20);
+                    break;
+                case "Healer", "healer", "2":
+                    hero = new Healer(name);
+                    hero.setWeapon("Stick", 10);
+                    break;
+                case "Mage", "mage", "3":
+                    hero = new Mage(name);
+                    hero.setWeapon("MagicWand", 40);
+                    break;
+                case "Hunter", "hunter", "4":
+                    hero = new Hunter(name);
+                    hero.setWeapon("Bow", 30);
+                    break;
+                default:
+                    System.out.println("Wrong input, try again");
+                    break;
+            }
+            if (hero != null) {
+                this.heros.add(hero);
+            }
 
 
         }
 
     }
 
-    private void initializeEnemies(){
+    private void initializeEnemies() {
         Random random = new Random();
-        for (int i =0; i< heros.size() +nbFight ; i++) {
+        for (int i = 0; i < heros.size() + nbFight; i++) {
             int nb;
             nb = random.nextInt(3);
-            switch(nb) {
+            switch (nb) {
                 case 0:
                     Enemy enemy = new Goblin();
                     enemies.add(enemy);
@@ -113,24 +112,33 @@ public class Game {
         System.out.println("Hi there Adventurer, you're mission will be, if you accept it... \ni hope you will... it's important you know.. but i'll understand if you prefer to sleep away your problems..\nAnyway..." +
                 "\nYou will have to save the \uD83C\uDF0FWorld from the Massive invasion of \uD83D\uDC7EMonsters." +
                 "\nTo do so, choose your \uD83E\uDDB8heros (the number of ennemies will vary according to the number of heros..). \n" +
-                "Each \uD83E\uDDB8Hero will have 5 \uD83C\uDF72meals with him, spellcaster will also be given 5 ⚗potions each to regenerate their \uD83D\uDCA7mana. " );
+                "Each \uD83E\uDDB8Hero will have 5 \uD83C\uDF72meals with him, spellcaster will also be given 5 ⚗potions each to regenerate their \uD83D\uDCA7mana. ");
         System.out.println("Now that you are more aware of the current situation of the \uD83C\uDF0Fworld, i will let you begin your \uD83D\uDDFAadventure");
         System.out.println();
         Random random = new Random();
         int ixHero = 0;
         int ixEnemy;
-        int nbHero;
+        int nbHero = 0;
+
         //Création de la liste des héros
         System.out.println("How many Heros do you want ?");
 
-        while(true) {
-            nbHero = scanner.nextInt();
-            if(nbHero>0){
-                break;
+        while (true) {
+            System.out.print(" ");
+            if (scanner.hasNextInt()) {
+                int num = scanner.nextInt();
+                if (num > 0) {
+                    nbHero = num;
+                    break;
+                } else {
+                    System.out.println("Please enter a positive number");
+                }
             } else {
-                System.out.println("You have to choose a positive number");
+                System.out.println("Please enter a positive number");
+                scanner.next(); // pour consommer l'entrée non valide et passer à la suivante
             }
         }
+
         initializeHeros(nbHero);
 
         //Boucle de 4 combats Avant le Combat final contre le BOSS
@@ -200,13 +208,12 @@ public class Game {
 
             // Attaque de l'ennemi
             System.out.println("It's " + goodOne.getName() + "'s turn to do an action");
-            System.out.println(goodOne.getName() + " will target " + badOne.getName());
             goodOne.doAction(enemies, heros, ixHero);
 
             if (badOne.getHealthPoint()>0){
                 badOne.fight(goodOne);
                 displayMessage("> " + badOne.getName()
-                        + " attack " + goodOne.getName() + " ! ");
+                        + " attack " + goodOne.getName() + " ! (-"+badOne.getDamagePoints()+"♥)");
                 if (goodOne.getHealthPoint() <= 0) {
                     displayMessage
                             (goodOne.getName() + " has found an honorable death...");

@@ -32,8 +32,12 @@ public class Mage extends SpellCaster{
             System.out.println("He has \uD83C\uDF72" + food.size()+ " left and ⚗"+ potions.size()+" left.");
             System.out.println("you have  \uD83D\uDCA7" + mana + " mana left, what do you want to do ?");
             System.out.println("    (1) Attack (-5 \uD83D\uDCA7mana) (-"+ weapon.getDamagePoints()+"\uD83D\uDCA5)");
-            System.out.println("    (2) \uD83C\uDF72Eat (+♥40)");
-            System.out.println("    (3) Use ⚗Potion (+\uD83D\uDCA720)");
+            if (!food.isEmpty()){
+                System.out.println("    (2) \uD83C\uDF72Eat (+"+ food.get(0).getHpToHeal()+"♥)");
+            }
+            if (!potions.isEmpty()){
+                System.out.println("    (4) Use ⚗Potion (+\uD83D\uDCA720)");
+            }
             String action = scanner.nextLine();
             switch (action) {
                 case "1","attack":

@@ -31,8 +31,13 @@ public class Healer extends SpellCaster {
             System.out.println("You have  \uD83D\uDCA7"+ mana + " mana left, what do you want to do ?");
             System.out.println("    (1) ⚔Attack (-"+ weapon.getDamagePoints()+"\uD83D\uDCA5)");
             System.out.println("    (2) Heal (-15 \uD83D\uDCA7mana) (+♥30)");
-            System.out.println("    (3) \uD83C\uDF72Eat (+♥40)");
-            System.out.println("    (4) Use ⚗Potion (+\uD83D\uDCA720)");
+            if (!food.isEmpty()){
+                System.out.println("    (2) \uD83C\uDF72Eat (+"+ food.get(0).getHpToHeal()+"♥)");
+            }
+            if (!potions.isEmpty()){
+                System.out.println("    (4) Use ⚗Potion (+\uD83D\uDCA720)");
+            }
+
             String action = scanner.nextLine();
             switch (action) {
                 case "1":
